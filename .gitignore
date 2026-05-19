@@ -1,0 +1,8 @@
+# Carpetas de compilacion
+build/
+dist/
+
+#configuracionlocal de netbeans
+nbprojects/private/
+
+

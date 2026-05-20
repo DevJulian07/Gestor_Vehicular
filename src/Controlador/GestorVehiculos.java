@@ -4,10 +4,17 @@
  */
 package Controlador;
 
+import Modelo.Vehiculo;
+import java.util.ArrayList;
 /**
  *
  * @author ASUS
  */
 public class GestorVehiculos {
+    private ArrayList<Vehiculo> listaVehiculos;
+    
+    public GestorVehiculos() {
+        this.listaVehiculos = new ArrayList<>();
+    }
     
 }

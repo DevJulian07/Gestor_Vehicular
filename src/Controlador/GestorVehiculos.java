@@ -30,4 +30,37 @@ public class GestorVehiculos {
              return "Error: indice invalido.";
          }
      }
+     
+     public String buscarVehiculo(String marca){
+     String resultado = ""; 
+      for (int i = 0; i < this.listaVehiculos.size(); i++) {
+      Vehiculo vehiculoActual = this.listaVehiculos.get(i);
+      if (vehiculoActual.getMarca().equalsIgnoreCase(marca)){
+        resultado = resultado + "[" + i + "]" + vehiculoActual.toString();
+      }
+      }
+      
+      if (resultado.isEmpty()) {
+        return "No se encontro ningun vehiculo de la marca: " + marca;
+      }
+      
+      return resultado;
+     }
+     
+     public String obtenerTodos() {
+     
+        if (this.listaVehiculos.isEmpty()){
+            return "no hay vehiculos registrados.";
+        }
+     
+        String resultado = "";
+        
+        for (int i=0; i < this.listaVehiculos.size(); i++){
+            resultado = resultado + "[" + i + "]" + this.listaVehiculos.get(i).toString();
+        } 
+        
+        return resultado;
+     }
+     
+     
 }

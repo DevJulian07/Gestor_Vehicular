@@ -4,15 +4,28 @@
  */
 package Vista;
 
+import Controlador.GestorVehiculos;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ASUS
  */
 public class RegistroVehiculos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegistroVehiculos
-     */
+    private GestorVehiculos gestor = new GestorVehiculos();
+    
+    private void limpiarCampos() {
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jComboBox4.setSelectedIndex(0);
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0);
+        bgEstado.clearSelection();
+    }
+    
+    private void refrescarTextArea() {
+    jTextArea1.setText(gestor.obtenerTodos());
+    }
     public RegistroVehiculos() {
         initComponents();
     }
@@ -30,18 +43,18 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -63,11 +76,26 @@ public class RegistroVehiculos extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Datos vehiculo"));
 
+        jLabel2.setText("Pais");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Marca");
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setText("Tipo Vehiculo");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel2.setText("Pais");
+        jLabel6.setText("Año Fabricacion");
+
+        jTextField3.setText("jTextField2");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Modelo");
 
@@ -88,21 +116,6 @@ public class RegistroVehiculos extends javax.swing.JFrame {
 
         bgEstado.add(jRadioButton2);
         jRadioButton2.setText("Usado");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel4.setText("Marca");
-
-        jLabel5.setText("Tipo Vehiculo");
-
-        jLabel6.setText("Año Fabricacion");
-
-        jTextField3.setText("jTextField2");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,12 +232,27 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton4.setText("Agregar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Buscar");
 
         jButton7.setText("Cerrar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -338,9 +366,62 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String pais = jComboBox4.getSelectedItem().toString().trim();
+        String marca = jComboBox1.getSelectedItem().toString().trim();
+        String tipoVehiculo = jComboBox2.getSelectedItem().toString().trim();
+        String anioTexto = jTextField3.getText().trim();
+        String modelo = jTextField2.getText().trim();
+        
+        if (modelo.isEmpty() || anioTexto.isBlank()) {
+        JOptionPane.showMessageDialog(this, "Por favor completa los campos de modelo y año.", "Campos  incoompletos", JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+        
+        int anioFabricacion;
+        try {
+            anioFabricacion = Integer.parseInt(anioTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El año debe ser un numero entero.", "Año invalido", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+            JOptionPane.showMessageDialog(this,
+                "Selecciona si el vehículo es Nuevo o Usado.",
+                "Estado requerido",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        boolean esNuevo = jRadioButton1.isSelected();
+        
+        gestor.agregarVehiculo(pais, marca, tipoVehiculo, modelo, anioFabricacion, esNuevo);
+        
+        JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
+        limpiarCampos();
+        
+        refrescarTextArea();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String input = JOptionPane.showInputDialog(this, "Ingresa el indice del vehiculo a eliminar: ");
+        if (input == null || input.trim().isEmpty()) return;
+        
+        try{
+            int indice = Integer.parseInt(input.trim());
+            String resultado = gestor.eliminarVehiculo(indice);
+            jTextArea1.setText(resultado);
+            refrescarTextArea();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El indice debe ser un numero entero.", "Indice invalido", JOptionPane.ERROR_MESSAGE);
+        
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

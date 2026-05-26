@@ -7,6 +7,8 @@ package Vista;
 import Controlador.GestorVehiculos;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import Controlador.GestorArchivos;
+import javax.swing.JFileChooser;
 /**
  *
  * @author ASUS
@@ -14,6 +16,8 @@ import javax.swing.JSpinner;
 public class RegistroVehiculos extends javax.swing.JFrame {
 
     private GestorVehiculos gestor = new GestorVehiculos();
+   
+    private GestorArchivos gestorArchivos = new GestorArchivos(); // <- agrega esta línea
     
     private void limpiarCampos() {
         jTextField2.setText("");
@@ -33,7 +37,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         configurarSpinnerAnio();
     }
     
-    private void configurarSpinnerAnio(){
+    private void configurarSpinnerAnio(){ 
         int anioActual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
         javax.swing.SpinnerNumberModel modeloAnio = new javax.swing.SpinnerNumberModel(
         anioActual, 1900, anioActual, 1);
@@ -91,15 +95,20 @@ public class RegistroVehiculos extends javax.swing.JFrame {
 
         jLabel2.setText("Pais");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alemania", "Francia", "Italia", "Reino Unido", "España", "Suecia", "Turquía", "Alemania", "Francia", "Italia", "Reino Unido", "España", "Estados Unidos", "Canadá", "México", "Brasil", "Argentina", "Colombia", "Japón", "Corea del Sur", "China", "India" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Marca");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Porsche", "Toyota", "Honda", "Nissan", "Mazda", "Subaru", "Mitsubishi", "Ford", "Chevrolet", "Tesla", "Dodge", "Jeep", "Cadillac", "GMC", "Hyundai", "Kia", "Genesis", "Renault", "Peugeot", "Citroën", "Bugatti (histórica/francesa)", "Ferrari", "Lamborghini", "Fiat", "Maserati", "Alfa Romeo", "BYD", "Geely", "Chery", "Great Wall", "NIO", "Tata Motors", "Mahindra", "Volvo", "Koenigsegg", "Reino Unido", "Rolls-Royce", "Bentley", "Jaguar", "Land Rover", "Aston Martin", "McLaren" }));
 
         jLabel5.setText("Tipo Vehiculo");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Automóvil (sedán)", "Hatchback", "SUV (todoterreno urbano)", "Crossover", "Camioneta (pickup)", "Coupé", "Convertible / Cabrio", "Familiar / Station wagon", "Minivan / Monovolumen", "Deportivo", "Superdeportivo", "Hiperdeportivo", "Eléctrico", "Híbrido", "Camión", "Camión ligero", "Camión pesado", "Tractocamión", "Tractor agrícola", "Vehículo militar", "Ambulancia", "Carro de policía", "Vehículo blindado", "Camper ", "Limusina" }));
 
         jLabel6.setText("Año Fabricacion");
 
@@ -145,7 +154,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBox1, 0, 127, Short.MAX_VALUE)
+                                        .addComponent(jComboBox1, 0, 0, Short.MAX_VALUE)
                                         .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -202,8 +211,18 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("crear y guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Leer");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar txt");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -371,7 +390,28 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
+    JFileChooser selector = new JFileChooser();
+    selector.setDialogTitle("Selecciona el archivo a eliminar");
+
+    int opcion = selector.showOpenDialog(this);
+
+    if (opcion == JFileChooser.APPROVE_OPTION) {
+
+        String ruta = selector.getSelectedFile().getAbsolutePath();
+
+        int confirmar = JOptionPane.showConfirmDialog(this,
+            "¿Seguro que quieres eliminar este archivo?\n" + ruta,
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+            String resultado = gestorArchivos.eliminarArchivo(ruta);
+            jTextArea1.setText(resultado);
+        }
+    }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -437,6 +477,41 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         String resultado = gestor.buscarVehiculo(marca.trim());
         jTextArea1.setText(resultado);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser selector = new JFileChooser();
+        selector.setDialogTitle("Guardar Vehiculos");
+        
+        selector.setSelectedFile(new java.io.File("Vehiculos.txt"));
+        
+        int opcion = selector.showSaveDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            String ruta = selector.getSelectedFile().getAbsolutePath();
+        
+            if (!ruta.endsWith(".txt")){
+                ruta = ruta + ".txt";
+            }
+            
+            String resultado = gestorArchivos.guardarArchivo(gestor.getListaVehiculos(), ruta);
+            jTextArea1.setText(resultado);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser selector = new JFileChooser();
+        selector.setDialogTitle("Abrir archivo de vehiculos");
+        
+        int opcion = selector.showOpenDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION){
+            String ruta = selector.getSelectedFile().getAbsolutePath();
+            String resultado = gestorArchivos.leerArchivo(ruta);
+            jTextArea1.setText(resultado);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

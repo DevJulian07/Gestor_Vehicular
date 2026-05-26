@@ -62,5 +62,9 @@ public class GestorVehiculos {
         return resultado;
      }
      
+     public ArrayList<Vehiculo> getListaVehiculos() {
+        return this.listaVehiculos;
+    }
+     
      
 }

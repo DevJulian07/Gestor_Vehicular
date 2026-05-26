@@ -135,7 +135,7 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jComboBox1" pref="127" max="32767" attributes="0"/>
+                                              <Component id="jComboBox1" pref="0" max="32767" attributes="0"/>
                                               <Component id="jComboBox2" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -216,14 +216,35 @@
             <Component class="javax.swing.JComboBox" name="jComboBox4">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="22">
+                    <StringItem index="0" value="Alemania"/>
+                    <StringItem index="1" value="Francia"/>
+                    <StringItem index="2" value="Italia"/>
+                    <StringItem index="3" value="Reino Unido"/>
+                    <StringItem index="4" value="Espa&#xf1;a"/>
+                    <StringItem index="5" value="Suecia"/>
+                    <StringItem index="6" value="Turqu&#xed;a"/>
+                    <StringItem index="7" value="Alemania"/>
+                    <StringItem index="8" value="Francia"/>
+                    <StringItem index="9" value="Italia"/>
+                    <StringItem index="10" value="Reino Unido"/>
+                    <StringItem index="11" value="Espa&#xf1;a"/>
+                    <StringItem index="12" value="Estados Unidos"/>
+                    <StringItem index="13" value="Canad&#xe1;"/>
+                    <StringItem index="14" value="M&#xe9;xico"/>
+                    <StringItem index="15" value="Brasil"/>
+                    <StringItem index="16" value="Argentina"/>
+                    <StringItem index="17" value="Colombia"/>
+                    <StringItem index="18" value="Jap&#xf3;n"/>
+                    <StringItem index="19" value="Corea del Sur"/>
+                    <StringItem index="20" value="China"/>
+                    <StringItem index="21" value="India"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox4ActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -236,11 +257,53 @@
             <Component class="javax.swing.JComboBox" name="jComboBox1">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="46">
+                    <StringItem index="0" value="BMW"/>
+                    <StringItem index="1" value="Mercedes-Benz"/>
+                    <StringItem index="2" value="Audi"/>
+                    <StringItem index="3" value="Volkswagen"/>
+                    <StringItem index="4" value="Porsche"/>
+                    <StringItem index="5" value="Toyota"/>
+                    <StringItem index="6" value="Honda"/>
+                    <StringItem index="7" value="Nissan"/>
+                    <StringItem index="8" value="Mazda"/>
+                    <StringItem index="9" value="Subaru"/>
+                    <StringItem index="10" value="Mitsubishi"/>
+                    <StringItem index="11" value="Ford"/>
+                    <StringItem index="12" value="Chevrolet"/>
+                    <StringItem index="13" value="Tesla"/>
+                    <StringItem index="14" value="Dodge"/>
+                    <StringItem index="15" value="Jeep"/>
+                    <StringItem index="16" value="Cadillac"/>
+                    <StringItem index="17" value="GMC"/>
+                    <StringItem index="18" value="Hyundai"/>
+                    <StringItem index="19" value="Kia"/>
+                    <StringItem index="20" value="Genesis"/>
+                    <StringItem index="21" value="Renault"/>
+                    <StringItem index="22" value="Peugeot"/>
+                    <StringItem index="23" value="Citro&#xeb;n"/>
+                    <StringItem index="24" value="Bugatti (hist&#xf3;rica/francesa)"/>
+                    <StringItem index="25" value="Ferrari"/>
+                    <StringItem index="26" value="Lamborghini"/>
+                    <StringItem index="27" value="Fiat"/>
+                    <StringItem index="28" value="Maserati"/>
+                    <StringItem index="29" value="Alfa Romeo"/>
+                    <StringItem index="30" value="BYD"/>
+                    <StringItem index="31" value="Geely"/>
+                    <StringItem index="32" value="Chery"/>
+                    <StringItem index="33" value="Great Wall"/>
+                    <StringItem index="34" value="NIO"/>
+                    <StringItem index="35" value="Tata Motors"/>
+                    <StringItem index="36" value="Mahindra"/>
+                    <StringItem index="37" value="Volvo"/>
+                    <StringItem index="38" value="Koenigsegg"/>
+                    <StringItem index="39" value="Reino Unido"/>
+                    <StringItem index="40" value="Rolls-Royce"/>
+                    <StringItem index="41" value="Bentley"/>
+                    <StringItem index="42" value="Jaguar"/>
+                    <StringItem index="43" value="Land Rover"/>
+                    <StringItem index="44" value="Aston Martin"/>
+                    <StringItem index="45" value="McLaren"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -256,11 +319,32 @@
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="25">
+                    <StringItem index="0" value="Autom&#xf3;vil (sed&#xe1;n)"/>
+                    <StringItem index="1" value="Hatchback"/>
+                    <StringItem index="2" value="SUV (todoterreno urbano)"/>
+                    <StringItem index="3" value="Crossover"/>
+                    <StringItem index="4" value="Camioneta (pickup)"/>
+                    <StringItem index="5" value="Coup&#xe9;"/>
+                    <StringItem index="6" value="Convertible / Cabrio"/>
+                    <StringItem index="7" value="Familiar / Station wagon"/>
+                    <StringItem index="8" value="Minivan / Monovolumen"/>
+                    <StringItem index="9" value="Deportivo"/>
+                    <StringItem index="10" value="Superdeportivo"/>
+                    <StringItem index="11" value="Hiperdeportivo"/>
+                    <StringItem index="12" value="El&#xe9;ctrico"/>
+                    <StringItem index="13" value="H&#xed;brido"/>
+                    <StringItem index="14" value="Cami&#xf3;n"/>
+                    <StringItem index="15" value="Cami&#xf3;n ligero"/>
+                    <StringItem index="16" value="Cami&#xf3;n pesado"/>
+                    <StringItem index="17" value="Tractocami&#xf3;n"/>
+                    <StringItem index="18" value="Tractor agr&#xed;cola"/>
+                    <StringItem index="19" value="Veh&#xed;culo militar"/>
+                    <StringItem index="20" value="Ambulancia"/>
+                    <StringItem index="21" value="Carro de polic&#xed;a"/>
+                    <StringItem index="22" value="Veh&#xed;culo blindado"/>
+                    <StringItem index="23" value="Camper "/>
+                    <StringItem index="24" value="Limusina"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -351,11 +435,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="crear y guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Leer"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>

@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.GestorVehiculos;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 /**
  *
  * @author ASUS
@@ -16,7 +17,8 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     
     private void limpiarCampos() {
         jTextField2.setText("");
-        jTextField3.setText("");
+        jSpinner1.setValue(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR));
+        
         jComboBox4.setSelectedIndex(0);
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
@@ -28,6 +30,17 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }
     public RegistroVehiculos() {
         initComponents();
+        configurarSpinnerAnio();
+    }
+    
+    private void configurarSpinnerAnio(){
+        int anioActual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        javax.swing.SpinnerNumberModel modeloAnio = new javax.swing.SpinnerNumberModel(
+        anioActual, 1900, anioActual, 1);
+        jSpinner1.setModel(modeloAnio);
+        
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(jSpinner1, "#");
+        jSpinner1.setEditor(editor);
     }
 
     /**
@@ -50,11 +63,11 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jSpinner1 = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -89,13 +102,6 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("Año Fabricacion");
-
-        jTextField3.setText("jTextField2");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Modelo");
 
@@ -140,27 +146,28 @@ public class RegistroVehiculos extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jComboBox1, 0, 127, Short.MAX_VALUE)
-                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jSpinner1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
                 .addGap(51, 51, 51))
         );
         jPanel2Layout.setVerticalGroup(
@@ -179,9 +186,9 @@ public class RegistroVehiculos extends javax.swing.JFrame {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,10 +374,6 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         int confirmar = JOptionPane.showConfirmDialog(this,
             "¿Deseas cerrar la aplicación?",
@@ -386,20 +389,12 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         String pais = jComboBox4.getSelectedItem().toString().trim();
         String marca = jComboBox1.getSelectedItem().toString().trim();
         String tipoVehiculo = jComboBox2.getSelectedItem().toString().trim();
-        String anioTexto = jTextField3.getText().trim();
+        int anioFabricacion = (int) jSpinner1.getValue();
         String modelo = jTextField2.getText().trim();
         
-        if (modelo.isEmpty() || anioTexto.isBlank()) {
+        if (modelo.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Por favor completa los campos de modelo y año.", "Campos  incoompletos", JOptionPane.WARNING_MESSAGE);
         return;
-        }
-        
-        int anioFabricacion;
-        try {
-            anioFabricacion = Integer.parseInt(anioTexto);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El año debe ser un numero entero.", "Año invalido", JOptionPane.ERROR_MESSAGE);
-            return;
         }
         
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
@@ -501,8 +496,8 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

@@ -246,6 +246,11 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         });
 
         jButton6.setText("Buscar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Cerrar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -367,7 +372,14 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        int confirmar = JOptionPane.showConfirmDialog(this,
+            "¿Deseas cerrar la aplicación?",
+            "Confirmar cierre",
+            JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -421,6 +433,15 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String marca = JOptionPane.showInputDialog(this, "Ingrese la marca a buscar");
+        
+        if (marca==null || marca.trim().isEmpty()) return;
+        
+        String resultado = gestor.buscarVehiculo(marca.trim());
+        jTextArea1.setText(resultado);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

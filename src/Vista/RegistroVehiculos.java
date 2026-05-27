@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import Controlador.GestorArchivos;
 import javax.swing.JFileChooser;
+import Modelo.Vehiculo;
+import java.util.ArrayList;
 /**
  *
  * @author ASUS
@@ -16,8 +18,8 @@ import javax.swing.JFileChooser;
 public class RegistroVehiculos extends javax.swing.JFrame {
 
     private GestorVehiculos gestor = new GestorVehiculos();
-   
     private GestorArchivos gestorArchivos = new GestorArchivos(); // <- agrega esta línea
+    private javax.swing.table.DefaultTableModel modeloTabla;
     
     private void limpiarCampos() {
         jTextField2.setText("");
@@ -29,13 +31,45 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         bgEstado.clearSelection();
     }
     
-    private void refrescarTextArea() {
-    jTextArea1.setText(gestor.obtenerTodos());
+    private void refrescarTabla() {
+
+    modeloTabla.setRowCount(0);
+
+    ArrayList<Vehiculo> lista = gestor.getListaVehiculos();
+
+    for (int i = 0; i < lista.size(); i++) {
+        Vehiculo v = lista.get(i);
+        modeloTabla.addRow(new Object[]{
+            v.getPais(),
+            v.getMarca(),
+            v.getTipoVehiculo(),
+            v.getModelo(),
+            v.getAnioFabricacion(),
+            v.isEsNuevo() ? "Nuevo" : "Usado"
+        });
+        }
     }
     public RegistroVehiculos() {
         initComponents();
         configurarSpinnerAnio();
+        configurarTabla();
     }
+    
+    private void configurarTabla() {
+
+    // Creamos el modelo con las columnas
+    modeloTabla = new javax.swing.table.DefaultTableModel(
+        new String[]{"País", "Marca", "Tipo", "Modelo", "Año", "Estado"}, 0
+    );
+
+    // El 0 significa que empieza con 0 filas — se llenan dinámicamente
+
+    // Le asignamos el modelo a la tabla
+    jTable2.setModel(modeloTabla);
+
+    // Para que el usuario no pueda editar las celdas directamente
+    jTable2.setDefaultEditor(Object.class, null);
+}
     
     private void configurarSpinnerAnio(){ 
         int anioActual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
@@ -83,7 +117,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,7 +239,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -314,9 +348,18 @@ public class RegistroVehiculos extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -408,8 +451,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
 
         if (confirmar == JOptionPane.YES_OPTION) {
             String resultado = gestorArchivos.eliminarArchivo(ruta);
-            jTextArea1.setText(resultado);
-        }
+            refrescarTabla();        }
     }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -451,7 +493,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
         limpiarCampos();
         
-        refrescarTextArea();
+        refrescarTabla();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -461,8 +503,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         try{
             int indice = Integer.parseInt(input.trim());
             String resultado = gestor.eliminarVehiculo(indice);
-            jTextArea1.setText(resultado);
-            refrescarTextArea();
+            refrescarTabla();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El indice debe ser un numero entero.", "Indice invalido", JOptionPane.ERROR_MESSAGE);
         
@@ -475,7 +516,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         if (marca==null || marca.trim().isEmpty()) return;
         
         String resultado = gestor.buscarVehiculo(marca.trim());
-        jTextArea1.setText(resultado);
+        refrescarTabla();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -493,7 +534,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
             }
             
             String resultado = gestorArchivos.guardarArchivo(gestor.getListaVehiculos(), ruta);
-            jTextArea1.setText(resultado);
+            refrescarTabla();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -505,7 +546,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         if (opcion == JFileChooser.APPROVE_OPTION){
             String ruta = selector.getSelectedFile().getAbsolutePath();
             String resultado = gestorArchivos.leerArchivo(ruta);
-            jTextArea1.setText(resultado);
+            refrescarTabla();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -572,7 +613,7 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

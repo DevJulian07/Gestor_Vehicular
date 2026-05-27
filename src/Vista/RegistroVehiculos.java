@@ -11,6 +11,7 @@ import Controlador.GestorArchivos;
 import javax.swing.JFileChooser;
 import Modelo.Vehiculo;
 import java.util.ArrayList;
+import java.awt.Color;
 /**
  *
  * @author ASUS
@@ -20,6 +21,12 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     private GestorVehiculos gestor = new GestorVehiculos();
     private GestorArchivos gestorArchivos = new GestorArchivos(); // <- agrega esta línea
     private javax.swing.table.DefaultTableModel modeloTabla;
+    private void confirmarCampo(java.awt.Component componente) {
+    componente.setBackground(new Color(200, 200, 200));
+    }
+    private void resetearCampo(java.awt.Component componente) {
+    componente.setBackground(Color.WHITE);
+    }
     
     private void limpiarCampos() {
         jTextField2.setText("");
@@ -29,6 +36,13 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
         bgEstado.clearSelection();
+        resetearCampo(jComboBox4);
+        resetearCampo(jComboBox1);
+        resetearCampo(jComboBox2);
+        resetearCampo(jSpinner1);
+        resetearCampo(jTextField2);
+        resetearCampo(jRadioButton1);
+        resetearCampo(jRadioButton2);
     }
     
     private void refrescarTabla() {
@@ -56,18 +70,12 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }
     
     private void configurarTabla() {
-
-    // Creamos el modelo con las columnas
     modeloTabla = new javax.swing.table.DefaultTableModel(
         new String[]{"País", "Marca", "Tipo", "Modelo", "Año", "Estado"}, 0
     );
 
-    // El 0 significa que empieza con 0 filas — se llenan dinámicamente
-
-    // Le asignamos el modelo a la tabla
     jTable2.setModel(modeloTabla);
 
-    // Para que el usuario no pueda editar las celdas directamente
     jTable2.setDefaultEditor(Object.class, null);
 }
     
@@ -79,6 +87,11 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(jSpinner1, "#");
         jSpinner1.setEditor(editor);
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {        
+    public void stateChanged(javax.swing.event.ChangeEvent evt) {
+        confirmarCampo(jSpinner1);
+    }
+    });
     }
 
     /**
@@ -139,10 +152,20 @@ public class RegistroVehiculos extends javax.swing.JFrame {
         jLabel4.setText("Marca");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Porsche", "Toyota", "Honda", "Nissan", "Mazda", "Subaru", "Mitsubishi", "Ford", "Chevrolet", "Tesla", "Dodge", "Jeep", "Cadillac", "GMC", "Hyundai", "Kia", "Genesis", "Renault", "Peugeot", "Citroën", "Bugatti (histórica/francesa)", "Ferrari", "Lamborghini", "Fiat", "Maserati", "Alfa Romeo", "BYD", "Geely", "Chery", "Great Wall", "NIO", "Tata Motors", "Mahindra", "Volvo", "Koenigsegg", "Reino Unido", "Rolls-Royce", "Bentley", "Jaguar", "Land Rover", "Aston Martin", "McLaren" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Tipo Vehiculo");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Automóvil (sedán)", "Hatchback", "SUV (todoterreno urbano)", "Crossover", "Camioneta (pickup)", "Coupé", "Convertible / Cabrio", "Familiar / Station wagon", "Minivan / Monovolumen", "Deportivo", "Superdeportivo", "Hiperdeportivo", "Eléctrico", "Híbrido", "Camión", "Camión ligero", "Camión pesado", "Tractocamión", "Tractor agrícola", "Vehículo militar", "Ambulancia", "Carro de policía", "Vehículo blindado", "Camper ", "Limusina" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Año Fabricacion");
 
@@ -425,11 +448,12 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        confirmarCampo(jTextField2);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        confirmarCampo(jRadioButton1);
+        confirmarCampo(jRadioButton2);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -551,8 +575,16 @@ public class RegistroVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
+        confirmarCampo(jComboBox4);
     }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        confirmarCampo(jComboBox1);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        confirmarCampo(jComboBox2); 
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
